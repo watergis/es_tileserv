@@ -12,30 +12,12 @@ module.exports = async(req, res, next)=>{
   if (!req.query.indices){
     throw {status: 400, message: `please spefify indices for searching`}
   }
-  if (!req.query.queries){
-    throw {status: 400, message: `please spefify queries for searching`}
-  }
   
   const indices = JSON.parse(req.query.indices);
-  const geometory = req.query.geometory | config.elasticsearch.geometry;
-  const queries = JSON.parse(req.query.queries);
 
-  let options = [];
-  for (let i = 0; i < indices.length; i++){
-    let opt = {
-      name: indices[i],
-      geometry: geometory
-    }
-    let query = queries[i];
-    if (Object.keys(query).length > 0){
-      opt.query = query;
-    }
-    options.push(opt)
-  }
-
-  console.log(z,x,y,options)
+  console.log(z,x,y,JSON.stringify(indices))
   const es2mvt = new elastic2mvt(config.elasticsearch.url);
-  const buffer = await es2mvt.generate(z,x,y,options)
+  const buffer = await es2mvt.generate(z,x,y,indices)
 
   res.set('Content-Type', 'application/x-protobuf');
   res.set('Content-Encoding', 'gzip');

@@ -27,12 +27,12 @@ After runing the server, please access [http://localhost:8080/docs](http://local
 ## Example
 for web browser
 ```
-http://localhost:8080/api/tile/14/9524/8269.pbf?indices=["water_connection","pipeline","wss"]&geometry=geom&queries=[{"term":{"connection_type":"Water Kiosk"}},{},{}]
+http://localhost:8080/api/tile/14/9524/8269.pbf?indices=[{"name":"water_connection","geometry":"geom","query":{"term":{"connection_type":"Water Kiosk"}}},{"name":"pipeline","geometry":"geom","query":{"match_all":{}}},{"name":"wss","geometry":"geom","query":{"match_all":{}}}]
 ```
 
 for curl
 ```
-curl -X GET "http://localhost:8080/api/tile/14/9524/8269.pbf?indices=%5B%22water_connection%22%2C%22pipeline%22%2C%22wss%22%5D&geometry=geom&queries=%5B%7B%22term%22%3A%7B%22connection_type%22%3A%22Water%20Kiosk%22%7D%7D%2C%7B%7D%2C%7B%7D%5D" -H  "accept: application/gzip"
+curl -X GET "http://localhost:8080/api/tile/14/9524/8269.pbf?indices=%5B%7B%22name%22%3A%22water_connection%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22term%22%3A%7B%22connection_type%22%3A%22Water%20Kiosk%22%7D%7D%7D%2C%7B%22name%22%3A%22pipeline%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%2C%7B%22name%22%3A%22wss%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%5D" -H  "accept: application/gzip"
 ```
 
 ## License

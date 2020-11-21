@@ -87,23 +87,14 @@ paths:
       parameters:
         - schema:
             type: string
-            example: '["water_connection","pipeline","wss"]'
+            example: '[{"name":"water_connection","geometry":"geom","query":{"term":{"connection_type":"Water Kiosk"}}},{"name":"pipeline","geometry":"geom","query":{"match_all":{}}},{"name":"wss","geometry":"geom","query":{"match_all":{}}}]'
           in: query
           name: indices
-          description: indices for Elasticsearch
-          required: true
-        - schema:
-            type: string
-            default: geom
-          in: query
-          name: geometry
-          description: geometry column name. Default is "geom"
-        - schema:
-            type: string
-            example: '[{"term":{"connection_type":"Water Kiosk"}},{},{}]'
-          in: query
-          name: queries
-          description: searching query for index. Ordering should be the same with indices parameter.
+          description: |-
+            JSON string of array of indices for Elasticsearch. It should contain the following properties.
+            - name: Required. Index for Elasticsearch
+            - geometry: Option. geometry name. Default is 'geom'
+            - query: Option. query for searching. Default is '{"match_all":{}}'
           required: true
 components:
   schemas: {}
