@@ -1,4 +1,6 @@
 # es_tileserv
+![GitHub](https://img.shields.io/github/license/JinIgarashi/es_tileserv)
+
 This is a simple vector tile server which is served from Elasticsearch.
 
 ## Install
