@@ -9,6 +9,17 @@ This is a simple vector tile server which is served from Elasticsearch.
 npm install
 ```
 
+## Configuration
+Edit `config.js` for your Elasticsearch tile API.
+
+```js
+elasticsearch: {
+    url: 'localhost:9200', //change it to your Elasticsearch URL
+    geometry: 'geom', //If geometry columnname of index is different name from 'geom', please specify here.
+    extension: 'pbf' //If you want to use other file extenstion for vector tiles except 'pbf', please speficy here.
+}
+```
+
 ## Usage
 
 ```
