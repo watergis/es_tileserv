@@ -25,7 +25,7 @@ After runing the server, please access [http://localhost:8080/docs](http://local
 ## Example
 for web browser
 ```
-ttp://localhost:8080/api/tile/14/9524/8269.pbf?indices=["water_connection","pipeline","wss"]&geometry=geom&queries=[{"term":{"connection_type":"Water Kiosk"}},{},{}]
+http://localhost:8080/api/tile/14/9524/8269.pbf?indices=["water_connection","pipeline","wss"]&geometry=geom&queries=[{"term":{"connection_type":"Water Kiosk"}},{},{}]
 ```
 
 for curl
