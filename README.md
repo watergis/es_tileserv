@@ -35,6 +35,12 @@ for curl
 curl -X GET "http://localhost:8080/api/tile/14/9524/8269.pbf?indices=%5B%7B%22name%22%3A%22water_connection%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22term%22%3A%7B%22connection_type%22%3A%22Water%20Kiosk%22%7D%7D%7D%2C%7B%22name%22%3A%22pipeline%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%2C%7B%22name%22%3A%22wss%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%5D" -H  "accept: application/gzip"
 ```
 
+## Test
+
+```
+npm test
+```
+
 ## License
 
 This source code is under `MIT license`.
