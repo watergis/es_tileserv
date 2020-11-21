@@ -2,11 +2,11 @@
   "name": "es_tileserv",
   "version": "1.0.0",
   "description": "This is a simple vector tile server which is served from Elasticsearch.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "npx mocha",
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "dev": "nodemon src/bin/www",
+    "start": "node src/bin/www"
   },
   "repository": {
     "type": "git",
