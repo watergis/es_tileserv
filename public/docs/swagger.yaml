@@ -96,5 +96,27 @@ paths:
             - geometry: Option. geometry name. Default is 'geom'
             - query: Option. query for searching. Default is '{"match_all":{}}'
           required: true
+  /healthcheck:
+    get:
+      summary: Healthcheck API
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                required:
+                  - status
+              examples:
+                example:
+                  value:
+                    status: ok
+      operationId: get-healthcheck
+      description: 'Check health of server. If everything is fine, it will return ''{"status":"ok"}''.'
 components:
   schemas: {}
