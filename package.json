@@ -1,0 +1,41 @@
+{
+  "name": "es_tileserv",
+  "version": "1.0.0",
+  "description": "This is a simple vector tile server which is served from Elasticsearch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha",
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JinIgarashi/es_tileserv.git"
+  },
+  "keywords": [
+    "vectortiles",
+    "elasticsearch",
+    "nodejs"
+  ],
+  "author": "Jin IGARASHI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JinIgarashi/es_tileserv/issues"
+  },
+  "homepage": "https://github.com/JinIgarashi/es_tileserv#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "elastic2mvt": "git+https://github.com/JinIgarashi/elastic2mvt.git",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
+  }
+}

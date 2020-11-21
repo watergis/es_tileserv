@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: es_tileserv
+  version: '1.0'
+  contact:
+    name: Jin IGARASHI
+    url: 'https://water-gis.com'
+    email: igarashi.jin@water-gis.com
+  description: This is an API of simple vector tile server which is served from Elasticsearch.
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
+servers:
+  - url: 'http://localhost:8080'
+    description: localhost
+paths:
+  '/api/tile/{z}/{x}/{y}.{ext}':
+    parameters:
+      - schema:
+          type: integer
+          example: 14
+          format: int32
+        name: z
+        in: path
+        required: true
+        description: Zoom level
+      - schema:
+          type: integer
+          example: 9524
+          format: int32
+        name: x
+        in: path
+        required: true
+        description: X index
+      - schema:
+          type: integer
+          example: 8269
+          format: int32
+        name: 'y'
+        in: path
+        required: true
+        description: Y index
+      - schema:
+          type: string
+          default: pbf
+        name: ext
+        in: path
+        required: true
+        description: File extension
+    get:
+      summary: Vector Tiles API
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                default: application/x-protobuf
+              required: true
+              description: application/x-protobuf
+            Content-Encoding:
+              schema:
+                type: string
+                default: gzip
+              description: gzip
+              required: true
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                default: GET
+              description: GET
+              required: true
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                default: '*'
+              description: '*'
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+      operationId: get-tile-z-x-y-.pbf
+      description: This is an API for serving binary vector tiles.
+      parameters:
+        - schema:
+            type: string
+            example: '["water_connection","pipeline","wss"]'
+          in: query
+          name: indices
+          description: indices for Elasticsearch
+          required: true
+        - schema:
+            type: string
+            default: geom
+          in: query
+          name: geometry
+          description: geometry column name. Default is "geom"
+        - schema:
+            type: string
+            example: '[{"term":{"connection_type":"Water Kiosk"}},{},{}]'
+          in: query
+          name: queries
+          description: searching query for index. Ordering should be the same with indices parameter.
+          required: true
+components:
+  schemas: {}
