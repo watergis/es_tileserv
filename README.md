@@ -10,11 +10,16 @@ npm install
 ```
 
 ## Configuration
+copy `.env.example` to `.env`
+```
+cp .env.example .env
+```
+
 Edit `config.js` for your Elasticsearch tile API.
 
 ```js
 elasticsearch: {
-    url: 'localhost:9200', //change it to your Elasticsearch URL
+    url: process.env.ELASTICSEARCH_URL, //change it to your Elasticsearch URL
     geometry: 'geom', //If geometry columnname of index is different name from 'geom', please specify here.
     extension: 'pbf' //If you want to use other file extenstion for vector tiles except 'pbf', please speficy here.
 }
@@ -29,6 +34,39 @@ npm run dev
 or
 # for production
 npm start
+```
+
+## Run on pm2
+First, please install `pm2` globally if you don't install it yet.
+```
+sudo npm install -g pm2
+```
+
+```
+# start server
+# for development
+npm run pm2:dev
+
+# for production
+npm run pm2:prod
+
+# stop server
+npm run pm2:stop
+```
+
+## Run on docker-compose together with Elasticsearch
+
+```
+# build docker image
+npm run docker:build
+# start pm2 on docker
+npm run docker:start
+```
+
+After running it on docker, please create index on Elasticsearch. The below is an example how to create index by ogr2ogr.
+
+```
+ogr2ogr -f "Elasticsearch" -lco NOT_ANALYZED_FIELDS={ALL} -lco INDEX_NAME=water_connection -lco OVERWRITE=YES http://localhost:9200 "PG:host='localhost' port=5432 user='postgres' dbname='rwss_assets' password='your password'" water_connection -skipfailures
 ```
 
 ## API documentation

@@ -1,0 +1,9 @@
+{
+    "name" : "es_tileserv",
+    "script" : "./src/bin/www",
+    "exec_mode": "cluster",
+    "instances": 4,
+    "env_production" : {
+        "NODE_ENV" : "production"
+    }
+}

@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 module.exports = {
     elasticsearch: {
-        url: 'localhost:9200',
+        url: process.env.ELASTICSEARCH_URL,
         geometry: 'geom',
         extension: 'pbf'
     }
