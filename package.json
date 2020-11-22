@@ -7,8 +7,8 @@
     "test": "npx mocha",
     "dev": "nodemon src/bin/www",
     "start": "node src/bin/www",
-    "pm2:dev": "pm2 start pm2.json",
-    "pm2:prod": "pm2 start pm2.json --env production",
+    "pm2:dev": "pm2 start .pm2/pm2.json",
+    "pm2:prod": "pm2 start .pm2/pm2.json --env production",
     "pm2:stop": "pm2 stop es_tileserv",
     "docker:build" : "docker build . --file .docker/Dockerfile --tag jinigarashi/es_tileserv",
     "docker:start": "docker-compose -f .docker/docker-compose.yml up"

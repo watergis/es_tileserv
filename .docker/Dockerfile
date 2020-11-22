@@ -15,4 +15,4 @@ RUN npm install -g pm2
 EXPOSE 8080
 
 # launch pm2
-CMD ["pm2", "--no-daemon", "start", "pm2.json","--env","production"]
+CMD ["pm2", "--no-daemon", "start", ".pm2/pm2.json","--env","production"]
