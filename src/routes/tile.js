@@ -14,8 +14,6 @@ module.exports = async(req, res, next)=>{
   }
   
   const indices = JSON.parse(req.query.indices);
-
-  console.log(z,x,y,JSON.stringify(indices))
   const es2mvt = new elastic2mvt(config.elasticsearch.url);
   const buffer = await es2mvt.generate(z,x,y,indices)
 
