@@ -20,7 +20,6 @@ Edit `config.js` for your Elasticsearch tile API.
 ```js
 elasticsearch: {
     url: process.env.ELASTICSEARCH_URL, //change it to your Elasticsearch URL
-    geometry: 'geom', //If geometry columnname of index is different name from 'geom', please specify here.
     extension: 'pbf' //If you want to use other file extenstion for vector tiles except 'pbf', please speficy here.
 }
 ```
