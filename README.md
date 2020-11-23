@@ -69,6 +69,20 @@ After running it on docker, please create index on Elasticsearch. The below is a
 ogr2ogr -f "Elasticsearch" -lco NOT_ANALYZED_FIELDS={ALL} -lco INDEX_NAME=water_connection -lco OVERWRITE=YES http://localhost:9200 "PG:host='localhost' port=5432 user='postgres' dbname='rwss_assets' password='your password'" water_connection -skipfailures
 ```
 
+## Insert sample data for test
+some building data from OSM in Narok town, Kenya will be inserted as following commands.
+
+```
+$ cd sample-data
+$ ./insert_test_data.sh
+
+$ ogrinfo ES:http://localhost:9200
+
+INFO: Open of `ES:http://localhost:9200'
+      using driver `Elasticsearch' successful.
+1: osm_building_narok (Multi Polygon)
+```
+
 ## API documentation
 
 After runing the server, please access [http://localhost:8080/docs](http://localhost:8080/docs).
@@ -76,12 +90,12 @@ After runing the server, please access [http://localhost:8080/docs](http://local
 ## Example
 for web browser
 ```
-http://localhost:8080/api/tile/14/9524/8269.pbf?indices=[{"name":"water_connection","geometry":"geom","query":{"term":{"connection_type":"Water Kiosk"}}},{"name":"pipeline","geometry":"geom","query":{"match_all":{}}},{"name":"wss","geometry":"geom","query":{"match_all":{}}}]
+http://localhost:8080/api/tile/14/9824/8241.pbf?indices=[{"name":"osm_building_narok","geometry":"geometry","query":{"term":{"building":"school"}}}]
 ```
 
 for curl
 ```
-curl -X GET "http://localhost:8080/api/tile/14/9524/8269.pbf?indices=%5B%7B%22name%22%3A%22water_connection%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22term%22%3A%7B%22connection_type%22%3A%22Water%20Kiosk%22%7D%7D%7D%2C%7B%22name%22%3A%22pipeline%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%2C%7B%22name%22%3A%22wss%22%2C%22geometry%22%3A%22geom%22%2C%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%5D" -H  "accept: application/gzip"
+curl -X GET "http://localhost:8080/api/tile/14/9824/8241.pbf?indices=%5B%7B%22name%22%3A%22osm_building_narok%22%2C%22geometry%22%3A%22geometry%22%2C%22query%22%3A%7B%22term%22%3A%7B%22building%22%3A%22school%22%7D%7D%7D%5D" -H  "accept: application/gzip"
 ```
 
 ## Test
@@ -89,6 +103,8 @@ curl -X GET "http://localhost:8080/api/tile/14/9524/8269.pbf?indices=%5B%7B%22na
 ```
 npm test
 ```
+
+Note. this test case can't work without installing sample test data of Narok town in Kenya.
 
 ## License
 

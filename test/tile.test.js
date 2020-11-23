@@ -12,33 +12,19 @@ describe('healthcheck test', ()=>{
 const base_url = '/api/tile';
 
 describe('tile api test', ()=>{
-    it('/14/9524/8269.pbf', (done)=>{
+    it('/14/9824/8241.pbf', (done)=>{
         const z = 14;
-        const x = 9524;
-        const y = 8269;
+        const x = 9824;
+        const y = 8241;
         const ext = 'pbf'
         const indices = [
             {
-                "name": "water_connection",
-                "geometry": "geom",
+                "name": "osm_building_narok",
+                "geometry": "geometry",
                 "query": {
                     "term": {
-                        "connection_type": "Water Kiosk"
+                        "building": "school"
                     }
-                }
-            },
-            {
-                "name": "pipeline",
-                "geometry": "geom",
-                "query": {
-                    "match_all": {}
-                }
-            },
-            {
-                "name": "wss",
-                "geometry": "geom",
-                "query": {
-                    "match_all": {}
                 }
             }
         ]

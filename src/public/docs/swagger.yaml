@@ -26,7 +26,7 @@ paths:
         description: Zoom level
       - schema:
           type: integer
-          example: 9524
+          example: 9824
           format: int32
         name: x
         in: path
@@ -34,7 +34,7 @@ paths:
         description: X index
       - schema:
           type: integer
-          example: 8269
+          example: 8241
           format: int32
         name: 'y'
         in: path
@@ -87,7 +87,7 @@ paths:
       parameters:
         - schema:
             type: string
-            example: '[{"name":"water_connection","geometry":"geom","query":{"term":{"connection_type":"Water Kiosk"}}},{"name":"pipeline","geometry":"geom","query":{"match_all":{}}},{"name":"wss","geometry":"geom","query":{"match_all":{}}}]'
+            example: '[{"name":"osm_building_narok","geometry":"geometry","query":{"term":{"building":"school"}}}]'
           in: query
           name: indices
           description: |-
