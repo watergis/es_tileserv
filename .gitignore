@@ -1,3 +1,6 @@
+*.mbtiles
+sample-tmp/
+
 # Logs
 logs
 *.log
