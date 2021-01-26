@@ -16,165 +16,37 @@ servers:
 paths:
   '/api/tile/{z}/{x}/{y}.{ext}':
     parameters:
-      - schema:
-          type: integer
-          example: 14
-          format: int32
-        name: z
-        in: path
-        required: true
-        description: Zoom level
-      - schema:
-          type: integer
-          example: 9824
-          format: int32
-        name: x
-        in: path
-        required: true
-        description: X index
-      - schema:
-          type: integer
-          example: 8241
-          format: int32
-        name: 'y'
-        in: path
-        required: true
-        description: Y index
-      - schema:
-          type: string
-          default: pbf
-        name: ext
-        in: path
-        required: true
-        description: File extension
+      - $ref: '#/components/parameters/zoom'
+      - $ref: '#/components/parameters/x_index'
+      - $ref: '#/components/parameters/y_index'
+      - $ref: '#/components/parameters/ext'
     get:
       summary: Vector Tiles API for Elasticsearch
       tags: []
       responses:
         '200':
-          description: OK
-          headers:
-            Content-Type:
-              schema:
-                type: string
-                default: application/x-protobuf
-              required: true
-              description: application/x-protobuf
-            Content-Encoding:
-              schema:
-                type: string
-                default: gzip
-              description: gzip
-              required: true
-            Access-Control-Allow-Methods:
-              schema:
-                type: string
-                default: GET
-              description: GET
-              required: true
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                default: '*'
-              description: '*'
-          content:
-            application/gzip:
-              schema:
-                type: string
-                format: binary
+          $ref: '#/components/responses/pbf'
       operationId: get-tile-z-x-y-.pbf
       description: This is an API for serving binary vector tiles.
       parameters:
-        - schema:
-            type: string
-            example: '[{"name":"osm_building_narok","geometry":"geometry","query":{"term":{"building":"school"}}}]'
-          in: query
-          name: indices
-          description: |-
-            JSON string of array of indices for Elasticsearch. It should contain the following properties.
-            - name: Required. Index for Elasticsearch
-            - geometry: Option. geometry name. Default is 'geom'
-            - query: Option. query for searching. Default is '{"match_all":{}}'
-          required: true
+        - $ref: '#/components/parameters/indices'
   '/api/tile/{tilesets}/{z}/{x}/{y}.{ext}':
     parameters:
-      - schema:
-          type: string
-          example: unvt
-        name: tilesets
-        in: path
-        required: true
-        description: 'Tileset name. Specify your filename of mbtiles. If it is "example.mbtiles", "example" will be tileset name.'
-      - schema:
-          type: integer
-          example: 12
-        name: z
-        in: path
-        required: true
-        description: Zoom level
-      - schema:
-          type: integer
-          example: 2118
-        name: x
-        in: path
-        required: true
-        description: X Index
-      - schema:
-          type: integer
-          example: 1454
-        name: 'y'
-        in: path
-        required: true
-        description: Y Index
-      - schema:
-          type: string
-          default: pbf
-        name: ext
-        in: path
-        required: true
-        description: File extension
+      - $ref: '#/components/parameters/tilesets'
+      - $ref: '#/components/parameters/zoom'
+      - $ref: '#/components/parameters/x_index'
+      - $ref: '#/components/parameters/y_index'
+      - $ref: '#/components/parameters/ext'
     get:
       summary: Vector Tiles API from mbtiles+Elasticsearch
       tags: []
       responses:
         '200':
-          description: OK
-          headers:
-            Content-Type:
-              schema:
-                type: string
-              description: application/x-protobuf
-            Content-Encoding:
-              schema:
-                type: string
-              description: gzip
-            Access-Control-Allow-Methods:
-              schema:
-                type: string
-              description: GET
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-              description: '*'
-          content:
-            application/json:
-              schema:
-                type: string
+          $ref: '#/components/responses/pbf'
       operationId: get-api-tile-tilesets-z-x-y-.-ext
       description: This is an API for serving binary vector tiles from base mbtiles and Elasticsearch result.
       parameters:
-        - schema:
-            type: string
-            example: '[{"name":"europe_switzerland_poi","geometry":"geometry"},{"name":"europe_switzerland_building","geometry":"geometry"}]'
-          in: query
-          name: indices
-          description: |-
-            Option. Please specify Elasticsearch queries if you want to overlay the information on base mbtiles. 
-            
-            JSON string of array of indices for Elasticsearch. It should contain the following properties.
-            - name: Required. Index for Elasticsearch
-            - geometry: Option. geometry name. Default is 'geom'
-            - query: Option. query for searching. Default is '{"match_all":{}}'
+        - $ref: '#/components/parameters/indices'
   /healthcheck:
     get:
       summary: Healthcheck API
@@ -199,3 +71,89 @@ paths:
       description: 'Check health of server. If everything is fine, it will return ''{"status":"ok"}''.'
 components:
   schemas: {}
+  responses:
+    pbf:
+      description: return pbf binary vector tile
+      content:
+        application/gzip:
+          schema:
+            type: string
+      headers:
+        Content-Type:
+          schema:
+            type: string
+          description: application/x-protobuf
+        Content-Encoding:
+          schema:
+            type: string
+          description: gzip
+        Access-Control-Allow-Methods:
+          schema:
+            type: string
+          description: GET
+        Access-Control-Allow-Origin:
+          schema:
+            type: string
+          description: '*'
+  parameters:
+    zoom:
+      name: z
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 24
+        example: 12
+      description: Zoom level
+    x_index:
+      name: x
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 2118
+        format: int32
+      description: X Index
+    y_index:
+      name: 'y'
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 1454
+      description: Y Index
+    ext:
+      name: ext
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+          - pbf
+        default: pbf
+      description: File extension
+    indices:
+      name: indices
+      in: query
+      required: false
+      schema:
+        type: string
+        example: '[{"name":"europe_switzerland_poi","geometry":"geometry"},{"name":"europe_switzerland_building","geometry":"geometry"}]'
+      description: |
+        Please specify Elasticsearch queries if you want to overlay the information on base mbtiles. 
+
+        JSON string of array of indices for Elasticsearch. It should contain the following properties.
+        - name: Required. Index for Elasticsearch
+        - geometry: Option. geometry name. Default is ''geom''
+        - query: Option. query for searching. Default is ''{"match_all":{}}''
+    tilesets:
+      name: tilesets
+      in: path
+      required: true
+      schema:
+        type: string
+        example: unvt
+        default: unvt
+      description: 'Tileset name. Specify your filename of mbtiles. If it is "example.mbtiles", "example" will be tileset name. You can put multiple tilesets by using comma like "tileset_a,tileset_b".'
