@@ -23,7 +23,8 @@ Edit `config.js` for your Elasticsearch tile API.
 elasticsearch: {
     url: process.env.ELASTICSEARCH_URL, //change it to your Elasticsearch URL
     extension: 'pbf' //If you want to use other file extenstion for vector tiles except 'pbf', please speficy here.
-}
+},
+tilesets: path.join(__dirname,'../tilesets') //specify folder path which stores your mbtiles.
 ```
 
 ## Usage
