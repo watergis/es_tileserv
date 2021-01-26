@@ -2,7 +2,7 @@ const MBTiles = require('@mapbox/mbtiles');
 const vtcomposite = require('@mapbox/vtcomposite');
 const fs = require('fs');
 const path = require('path');
-const elastic2mvt = require('elastic2mvt');
+const elastic2mvt = require('@watergis/elastic2mvt');
 const config = require('../config');
 
 const getTile = (file, z, x, y) => {

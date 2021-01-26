@@ -1,4 +1,4 @@
-const elastic2mvt = require('elastic2mvt');
+const elastic2mvt = require('@watergis/elastic2mvt');
 const config = require('../config');
 
 module.exports = async(req, res, next)=>{
