@@ -35,7 +35,7 @@ const compositeTiles = (buffers, z, x, y) => {
 }
 
 module.exports = async (req, res, next) => {
-  const tilesets = req.params.tilesets;
+  const tilesets = req.params.tilesets.split(',');
   const z = parseInt(req.params.z, 10);
   const x = parseInt(req.params.x, 10);
   const y = parseInt(req.params.y, 10);
@@ -44,26 +44,38 @@ module.exports = async (req, res, next) => {
     throw {status: 400, message: `unsupported file extension: ${ext}`}
   }
 
-  const tileset_path = path.join(config.tilesets, `${tilesets}.mbtiles`);
-  if (!fs.existsSync(tileset_path)) {
-    throw {status: 400, message: `Invalid tilesets name: ${tilesets}`}
+  let files = [];
+  tilesets.forEach(tileset => {
+    let tileset_path = path.join(config.tilesets, `${tileset}.mbtiles`);
+    if (!fs.existsSync(tileset_path)) {
+      throw {status: 400, message: `Invalid tilesets name: ${tileset}`}
+    }
+    files.push(tileset_path);
+  })
+
+  let tiles = []
+  for (let i = 0; i < files.length; i++) {
+    let tile = await getTile(files[i], z, x, y);
+    if (!tile) continue;
+    tiles.push(tile);
   }
-  let buffer = await getTile(tileset_path, z, x, y);
+  
   if (req.query.indices){
     const indices = JSON.parse(req.query.indices);
     const es2mvt = new elastic2mvt(config.elasticsearch.url);
-    const es_buffer = await es2mvt.generate(z, x, y, indices);
-    if (es_buffer) {
-      if (buffer) {
-        buffer = await compositeTiles([buffer, es_buffer], z, x, y);
-      } else {
-        buffer = es_buffer;
-      }
+    const tile = await es2mvt.generate(z, x, y, indices);
+    if (tile) {
+      tiles.push(tile);
     }
   }
 
-  if (!buffer) {
+  if (tiles.length === 0) {
     throw {status: 404, message: `No tile`}
+  }
+
+  let buffer = tiles[0];
+  if (buffer.length > 1) {
+    buffer = await compositeTiles(tiles, z, x, y);
   }
 
   res.set('Content-Type', 'application/x-protobuf');
