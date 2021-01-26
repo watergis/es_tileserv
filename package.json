@@ -29,14 +29,18 @@
   },
   "homepage": "https://github.com/JinIgarashi/es_tileserv#readme",
   "dependencies": {
+    "@mapbox/mbtiles": "^0.12.1",
+    "@mapbox/vtcomposite": "^0.3.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "elastic2mvt": "git+https://github.com/JinIgarashi/elastic2mvt.git",
     "express": "~4.16.1",
+    "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "chai": "^4.2.0",

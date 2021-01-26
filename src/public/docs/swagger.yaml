@@ -48,7 +48,7 @@ paths:
         required: true
         description: File extension
     get:
-      summary: Vector Tiles API
+      summary: Vector Tiles API for Elasticsearch
       tags: []
       responses:
         '200':
@@ -96,6 +96,85 @@ paths:
             - geometry: Option. geometry name. Default is 'geom'
             - query: Option. query for searching. Default is '{"match_all":{}}'
           required: true
+  '/api/tile/{tilesets}/{z}/{x}/{y}.{ext}':
+    parameters:
+      - schema:
+          type: string
+          example: unvt
+        name: tilesets
+        in: path
+        required: true
+        description: 'Tileset name. Specify your filename of mbtiles. If it is "example.mbtiles", "example" will be tileset name.'
+      - schema:
+          type: integer
+          example: 12
+        name: z
+        in: path
+        required: true
+        description: Zoom level
+      - schema:
+          type: integer
+          example: 2118
+        name: x
+        in: path
+        required: true
+        description: X Index
+      - schema:
+          type: integer
+          example: 1454
+        name: 'y'
+        in: path
+        required: true
+        description: Y Index
+      - schema:
+          type: string
+          default: pbf
+        name: ext
+        in: path
+        required: true
+        description: File extension
+    get:
+      summary: Vector Tiles API from mbtiles+Elasticsearch
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: application/x-protobuf
+            Content-Encoding:
+              schema:
+                type: string
+              description: gzip
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+              description: GET
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+              description: '*'
+          content:
+            application/json:
+              schema:
+                type: string
+      operationId: get-api-tile-tilesets-z-x-y-.-ext
+      description: This is an API for serving binary vector tiles from base mbtiles and Elasticsearch result.
+      parameters:
+        - schema:
+            type: string
+            example: '[{"name":"europe_switzerland_poi","geometry":"geometry"},{"name":"europe_switzerland_building","geometry":"geometry"}]'
+          in: query
+          name: indices
+          description: |-
+            Option. Please specify Elasticsearch queries if you want to overlay the information on base mbtiles. 
+            
+            JSON string of array of indices for Elasticsearch. It should contain the following properties.
+            - name: Required. Index for Elasticsearch
+            - geometry: Option. geometry name. Default is 'geom'
+            - query: Option. query for searching. Default is '{"match_all":{}}'
   /healthcheck:
     get:
       summary: Healthcheck API
