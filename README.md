@@ -1,7 +1,7 @@
 # es_tileserv
 ![GitHub](https://img.shields.io/github/license/watergis/es_tileserv)
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/igarashijin/es_tileserv)
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/igarashijin/es_tileserv)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/gis4water/es_tileserv)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/gis4water/es_tileserv)
 
 This is a simple vector tile server which is served from Elasticsearch.
 
@@ -63,7 +63,7 @@ npm run pm2:stop
 npm run docker:build
 
 # Or, you can pull the latest Docker image from Docker hub
-docker pull igarashijin/es_tileserv:latest
+docker pull gis4water/es_tileserv:latest
 
 # start pm2 on docker
 npm run docker:start

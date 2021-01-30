@@ -10,7 +10,7 @@ networks:
 
 services:
   es_tileserv:
-    image: igarashijin/es_tileserv:latest
+    image: gis4water/es_tileserv:latest
     # build:
     #   dockerfile: Dockerfile
     #   context: .
