@@ -1,4 +1,5 @@
 *.mbtiles
+.DS_Store
 
 # Logs
 logs

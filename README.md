@@ -1,5 +1,5 @@
 # es_tileserv
-![GitHub](https://img.shields.io/github/license/JinIgarashi/es_tileserv)
+![GitHub](https://img.shields.io/github/license/watergis/es_tileserv)
 ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/igarashijin/es_tileserv)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/igarashijin/es_tileserv)
 
