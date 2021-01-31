@@ -111,7 +111,7 @@ curl -X GET "http://localhost:8080/api/tile/unvt/10/597/517.pbf?indices=%5B%7B%2
 npm test
 ```
 
-Note. this test case can't work without installing sample test data of Narok town in Kenya.
+Note. this test case can't work without installing sample test data of Rwanda.
 
 ## License
 
