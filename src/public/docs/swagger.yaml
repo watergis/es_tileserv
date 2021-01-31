@@ -105,7 +105,7 @@ components:
         format: int32
         minimum: 0
         maximum: 24
-        example: 12
+        example: 10
       description: Zoom level
     x_index:
       name: x
@@ -113,7 +113,7 @@ components:
       required: true
       schema:
         type: integer
-        example: 2118
+        example: 597
         format: int32
       description: X Index
     y_index:
@@ -122,7 +122,7 @@ components:
       required: true
       schema:
         type: integer
-        example: 1454
+        example: 517
       description: Y Index
     ext:
       name: ext
@@ -140,7 +140,7 @@ components:
       required: false
       schema:
         type: string
-        example: '[{"name":"europe_switzerland_poi","geometry":"geometry"},{"name":"europe_switzerland_building","geometry":"geometry"}]'
+        example: '[{"name":"africa_rwanda_poi","geometry":"geometry"},{"name":"africa_rwanda_building","geometry":"geometry"}]'
       description: |
         Please specify Elasticsearch queries if you want to overlay the information on base mbtiles. 
 

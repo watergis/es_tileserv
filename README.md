@@ -86,7 +86,8 @@ $ ogrinfo ES:http://localhost:9200
 
 INFO: Open of `ES:http://localhost:9200'
       using driver `Elasticsearch' successful.
-1: osm_building_narok (Multi Polygon)
+1: africa_rwanda_poi (Point)
+2: africa_rwanda_building (Point)
 ```
 
 ## API documentation
@@ -96,12 +97,12 @@ After runing the server, please access [http://localhost:8080/docs](http://local
 ## Example
 for web browser
 ```
-http://localhost:8080/api/tile/14/9824/8241.pbf?indices=[{"name":"osm_building_narok","geometry":"geometry","query":{"term":{"building":"school"}}}]
+http://localhost:8080/api/tile/14/9824/8241.pbf?indices=[{"name":"africa_rwanda_poi","geometry":"geometry","query":{"term":{"building":"school"}}}]
 ```
 
 for curl
 ```
-curl -X GET "http://localhost:8080/api/tile/14/9824/8241.pbf?indices=%5B%7B%22name%22%3A%22osm_building_narok%22%2C%22geometry%22%3A%22geometry%22%2C%22query%22%3A%7B%22term%22%3A%7B%22building%22%3A%22school%22%7D%7D%7D%5D" -H  "accept: application/gzip"
+curl -X GET "http://localhost:8080/api/tile/unvt/10/597/517.pbf?indices=%5B%7B%22name%22%3A%22africa_rwanda_poi%22%2C%22geometry%22%3A%22geometry%22%2C%22query%22%3A%7B%22term%22%3A%7B%22building%22%3A%22school%22%7D%7D%7D%5D" -H  "accept: application/gzip"
 ```
 
 ## Test

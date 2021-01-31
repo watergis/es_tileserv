@@ -12,14 +12,16 @@ describe('healthcheck test', ()=>{
 const base_url = '/api/tile';
 
 describe('tile api test', ()=>{
-    it('/14/9824/8241.pbf', (done)=>{
-        const z = 14;
-        const x = 9824;
-        const y = 8241;
-        const ext = 'pbf'
+    const z = 10;
+    const x = 597;
+    const y = 517;
+    const ext = 'pbf'
+
+    it('/14/9824/8241.pbf POI', (done)=>{
+        
         const indices = [
             {
-                "name": "osm_building_narok",
+                "name": "africa_rwanda_poi",
                 "geometry": "geometry",
                 "query": {
                     "term": {
@@ -33,5 +35,50 @@ describe('tile api test', ()=>{
         .get(url)
         .expect(200)
         .end(done);
-        })
+    })
+
+    it('/14/9824/8241.pbf Building', (done)=>{
+        
+        const indices = [
+            {
+                "name": "africa_rwanda_building",
+                "geometry": "geometry",
+                "query": {
+                    "term": {
+                        "building": "church"
+                    }
+                }
+            }
+        ]
+        const url = `${base_url}/${z}/${x}/${y}.${ext}?indices=${JSON.stringify(indices)}`;
+        request(app)
+        .get(url)
+        .expect(200)
+        .end(done);
+    })
+})
+
+describe('Composite Tile API test', ()=>{
+    it('/unvt/14/9824/8241.pbf', (done)=>{
+        const z = 10;
+        const x = 597;
+        const y = 517;
+        const ext = 'pbf'
+        const indices = [
+            {
+                "name": "africa_rwanda_poi",
+                "geometry": "geometry",
+                "query": {
+                    "term": {
+                        "building": "school"
+                    }
+                }
+            }
+        ]
+        const url = `${base_url}/${z}/${x}/${y}.${ext}?indices=${JSON.stringify(indices)}`;
+        request(app)
+        .get(url)
+        .expect(200)
+        .end(done);
+    })
 })
