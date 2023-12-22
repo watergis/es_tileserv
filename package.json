@@ -30,7 +30,7 @@
   "homepage": "https://github.com/watergis/es_tileserv#readme",
   "dependencies": {
     "@mapbox/mbtiles": "^0.12.1",
-    "@mapbox/vtcomposite": "^0.3.0",
+    "@mapbox/vtcomposite": "https://github.com/mapbox/vtcomposite/archive/refs/tags/v2.1.0.tar.gz",
     "@watergis/elastic2mvt": "^1.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
